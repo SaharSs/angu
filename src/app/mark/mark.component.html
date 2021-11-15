@@ -1,0 +1,37 @@
+<form #f="ngForm" (ngSubmit)="addmark(f)" width="70px" height="60px">
+    <input class="uk-input" type="text" name="mark"   placeholder="mark"   #mark="ngModel" ngModel required>
+    <p class="alert alert-danger" *ngIf="mark.errors?.required && mark.touched">this input title is required</p>                
+
+    <input type="submit" value="addmark" class="btn btn-primary" [disabled]="f.invalid">
+  </form>
+  <div class="container">
+    <div class="body"  >
+
+    
+        <table class="table" >
+         <thead>
+    <tr>
+      <th scope="col">mark</th>
+      <th scope="col" colspan="3">options</th>
+    </tr>
+  </thead>
+    <tbody  *ngFor="let item of lj,index as i"  >
+     
+                    <tr>
+                      <td><h5 class="card-title">{{item.mark}}</h5></td>
+                    
+                      
+                            <td><a class="btn btn-primary" (click)="updatep(item.id)">update</a>
+                     </td>
+
+                    <td>
+                      <button class="btn btn-danger" (click)="delete(item.id)">delete</button>
+                    </td>
+                   
+                    </tr>
+    </tbody>
+   
+
+                  </table> 
+    </div>
+    

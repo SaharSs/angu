@@ -1,0 +1,28 @@
+<div class="container">
+
+    <form  #f="ngForm" (ngSubmit)="update(f)">
+        <input type="text" class="form-control" name="title" [(ngModel)]="dataProduct.title">
+       
+        <input type="text" class="form-control" name="description" [(ngModel)]="dataProduct.description">
+        <input type="text" class="form-control" name="price" [(ngModel)]="dataProduct.price">
+        <input type="text" class="form-control" name="np" [(ngModel)]="dataProduct.np">
+        <input type="text" class="form-control" name="offer" [(ngModel)]="dataProduct.offer">
+        <input type="text" class="form-control" name="offerv" [(ngModel)]="dataProduct.offerv">
+        <input type="text" class="form-control" name="offf" [(ngModel)]="dataProduct.offf">
+        <select name="mark" ngModel class="form-control">
+          <option value="">--Please choose an option--</option>
+          <option *ngFor="let mark of kl " [value]="mark.id">{{mark.mark}}</option>
+        </select>
+        <select name="catt" ngModel class="form-control">
+          <option value="">--Please choose an option--</option>
+          <option *ngFor="let catt of dll" [value]="catt.id">{{catt.categories}}</option>
+        </select>
+                    
+        <div class="alert alert-success" *ngIf="successUpdate">{{successUpdate}}</div>
+        <button class="btn btn-success" type="submit">Update now!</button>
+      </form>
+      </div>
+      
+
+
+

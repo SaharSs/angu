@@ -1,0 +1,245 @@
+ <div class="container py-5">
+   
+<div class="body">
+       
+        <div class="row">
+          <div class="col-3">
+            <select id="sort-by" (change)="sort($event)">
+                <option value="" selected disabled hidden>Sort By</option>
+                <option value="title">Name</option>
+                <option value="Low">Show Low to High Price</option>
+                <option value="High">Show High to Low Price</option>
+            </select>
+            </div>
+            </div>
+            <div class="container py-5">
+                <div class="row">
+        
+                    <div class="col-lg-3">
+    <h1 class="h2 pb-4">Categories</h1>
+  <ul  *ngFor="let cat of categoryList" class="list-unstyled templatemo-accordion">
+    
+        <li class="pb-3">
+   <a routerLink="/" [queryParams]="{categories:cat.id}"  class="collapsed d-flex justify-content-between h3 text-decoration-none" >
+         {{ cat.categories}}
+         <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
+    </a>
+    
+   <ul class="collapse show list-unstyled pl-3" *ngFor="let mr of markk">
+    
+   <li><a routerLink="/" [queryParams]="{categories:cat.id,mark:mr.id}"  class="text-decoration-none" >
+   {{mr.mark}}
+    </a></li>
+    </ul>
+   
+ </li>
+</ul>
+ 
+</div> 
+<div class="col-lg-9">
+    <div class="row">
+        <div class="col-md-6">
+            <ul class="list-inline shop-top-menu pb-3 pt-1">
+                <li class="list-inline-item">
+                    <a class="h3 text-dark text-decoration-none mr-3" >All computers</a>
+                </li>
+              
+            </ul>
+        </div>
+        <div class="col-md-6 pb-4">
+            <div class="d-flex">
+       
+            <input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="term">
+        </div>
+          </div>
+          </div>
+          
+          
+          <div class="row">
+           
+      
+
+    <div  class="col-md-4 " style="width: 10rem" *ngFor="let p of dtz| filter:term;index as i ">
+  
+           
+          
+        <div class="col" *ngIf="!categories && !mark ||!categories && !mark ">
+        
+            <div class="card mb-4 product-wap rounded-0">
+                <div class="card rounded-0">
+            <img [src]="p.Image"  alt="..."   class="card-img rounded-0 img-fluid" style="width: 11rem;height:7rem;"   >
+        <div class="card-body">
+          
+            <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                <ul class="list-unstyled">  
+                    <li> <h5 class="btn btn-success text-white">{{p.title}}</h5></li>
+    <li> <p class="card-text">{{p.Description}}</p><li>
+     <div *ngIf="p.offer!='discount'">
+        <div *ngIf="p.percent=='0'">
+    <li> <p  class="btn btn-success text-white mt-2">{{p.price}}</p></li>
+     </div>
+     </div>
+     <div *ngIf="p.offer=='discount'">
+        <div *ngIf="p.percent!='0'">
+      <div class="alert alert-success" *ngIf="m">{{m}}</div>
+    <li><p  class="btn btn-success text-white mt-2"><s>{{p.price}}</s></p>
+      <p  class="btn btn-success text-white mt-2">{{p.np}}</p></li>
+  </div>
+      </div>
+    </ul>
+    </div>
+    </div>
+</div>
+</div>
+
+      <div class="list-unstyled d-flex justify-content-center mb-1">
+        <a class="btn btn-success text-white mt-2" 
+     (click)="addto(i)"
+     *ngIf="add !== i"
+ >
+     Add to cart
+     <i class="fas fa-cart-plus"></i></a></div>
+
+
+ <div *ngIf="add === i">
+     <input
+         type="number"
+         class="form-control"
+         placeholder="qte"
+         #qte
+     >
+     <button
+         class="btn btn-primary"
+         (click)="buy(qte.value,p.id)" 
+     >
+         add
+     </button>
+     <div >{{me}}</div>
+     <app-star-review [usId]="usId" [prId]="prId"  ></app-star-review>
+   
+   </div>
+   
+</div>   
+   
+        <div class="col" *ngIf="categories && ! mark ">
+
+          <div *ngIf="p.categories==categories ">
+           <div class="card mb-4 product-wap rounded-0">
+    <div class="card rounded-0">
+            <img [src]="p.Image" class="card-img rounded-0 img-fluid" style="width: 11rem;height:7rem;"alt="..."    >
+            <div class="card-body">
+          
+                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                    <ul class="list-unstyled">
+            <h5 class="card-title">{{p.title}}</h5>
+         <p class="card-text">{{p.Description}}</p>
+        <div *ngIf="p.offer!='discount'">
+         <p class="card-text">{{p.price}}</p>
+         </div>
+         <div *ngIf="p.offer=='discount'">
+           <div *ngIf="p.percent!='0'">
+          <div class="alert alert-success" *ngIf="m">{{m}}</div>
+          <p class="card-text" ><s >{{p.price}}</s></p>
+          <p>{{p.np}}</p>
+       </div>
+       </div>
+    </ul>
+</div>
+</div>
+</div>
+
+          </div>
+          <div class="list-unstyled d-flex justify-content-center mb-1">
+            <a class="btn btn-success text-white mt-2" 
+         (click)="addto(i)"
+         *ngIf="add !== i"
+     >
+         Add to cart
+         <i class="fas fa-cart-plus"></i></a></div>
+    
+     <div *ngIf="add === i">
+         <input
+             type="number"
+             class="form-control"
+             placeholder="qte"
+             #qte
+         >
+         <button
+             class="btn btn-primary"
+             (click)="buy(qte.value,p.id)"
+         >
+             add
+         </button>
+         <div >{{me}}</div>
+         <app-star-review [usId]="usId" [prId]="prId"  ></app-star-review>
+       </div>
+  </div>
+</div>
+
+    
+
+     <div  *ngIf=" mark && categories">
+        <div *ngIf="p.mark==mark && p.categories==categories">
+      
+            <div *ngIf="p.categories==categories ">
+                <div class="card mb-4 product-wap rounded-0">
+         <div class="card rounded-0">
+        <img [src]="p.Image" class="card-img rounded-0 img-fluid" style="width: 11rem;height:7rem;" alt="...">
+        <div class="card-body">
+          
+            <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                <ul class="list-unstyled">
+        <h5 class="card-title">{{p.title}}</h5>
+     <p class="card-text">{{p.Description}}</p>
+    <div *ngIf="p.offer!='discount'">
+     <p class="card-text">{{p.price}}</p>
+     </div>
+     <div *ngIf="p.offer=='discount'">
+         <div *ngIf="p.percent!='0'">
+      <div class="alert alert-success" *ngIf="m">{{m}}</div>
+      <p class="card-text" ><s >{{p.price}}</s></p>
+      <p>{{p.np}}</p>
+  
+</div>
+</div>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="list-unstyled d-flex justify-content-center mb-1">
+    <a class="btn btn-success text-white mt-2" 
+ (click)="addto(i)"
+ *ngIf="add !== i"
+>
+ Add to cart
+ <i class="fas fa-cart-plus"></i></a></div>
+
+
+ <div *ngIf="add === i">
+     <input
+         type="number"
+         class="form-control"
+         placeholder="qte"
+         #qte
+     >
+     <button
+         class="btn btn-primary"
+         (click)="buy(qte.value,p.id)"
+     >
+         add
+     </button>
+     <div >{{me}}</div>
+     <app-star-review [usId]="usId" [prId]="prId"  ></app-star-review>
+   </div>
+   </div>
+   </div>
+   </div>
+   
+
+
+</div>
+</div>
+</div>
+</div>
+

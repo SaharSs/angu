@@ -1,0 +1,38 @@
+<form #f="ngForm" (ngSubmit)="addcat(f)" width="70px" height="60px">
+    <input class="uk-input" type="text" name="categories"   placeholder="categories"   #categories="ngModel" ngModel required>
+    <p class="alert alert-danger" *ngIf="categories.errors?.required && categories.touched">this input title is required</p>                
+
+    <input type="submit" value="Add" class="btn btn-primary" [disabled]="f.invalid">
+  </form>
+
+  <div class="container">
+    <div class="body"  >
+
+    
+        <table class="table" >
+         <thead>
+    <tr>
+      <th scope="col">categories</th>
+      <th scope="col" colspan="3">options</th>
+    </tr>
+  </thead>
+    <tbody  *ngFor="let item of kj,index as i"  >
+     
+                    <tr>
+                      <td><h5 class="card-title">{{item.categories}}</h5></td>
+                    
+                      
+                            <td><a class="btn btn-primary" (click)="updatep(item.id)">update</a>
+                     </td>
+
+                    <td>
+                      <button class="btn btn-danger" (click)="delete(item.id)">delete</button>
+                    </td>
+                   
+                    </tr>
+    </tbody>
+   
+
+                  </table> 
+    </div>
+    

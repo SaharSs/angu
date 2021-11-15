@@ -1,0 +1,24 @@
+<p>pay works!</p>
+<div>
+    <input type="button" value="Convert" (click)="convetToPDF()"/>
+    </div>
+
+<table
+class="table"
+style="text-align:center"  id="contentToConvert"
+>
+<thead>
+    <th>Name</th>
+    <th>adress</th>
+    <th>total</th>
+   
+ 
+</thead>
+<tbody *ngFor="let h of l">
+   <tr *ngIf="keyParams==h.uid">
+    <td >{{h.name}}</td>
+    <td >{{h.adress}}</td>
+    <td >{{h.total}}</td>
+   </tr>
+</tbody>
+</table>  

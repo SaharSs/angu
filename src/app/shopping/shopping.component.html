@@ -1,0 +1,101 @@
+
+<script src="https://js.stripe.com/v3"></script>
+<div class="body">
+   
+
+    <table
+        class="table"
+        style="text-align:center"
+    >
+        <thead>
+            <th>Name</th>
+            <th>Price</th>
+            
+            <th>qte</th>
+           
+            <th>Total</th>
+            <th>uid</th>
+            <th>Options</th>
+        </thead>
+        
+        <tbody   *ngIf="m==lp">
+           
+            <tr *ngFor="let g of fm; index as i">
+               
+                <td>{{g.title }}</td>
+                <td>
+                <div *ngIf="g.np==0">
+                {{g.price }}
+                </div>
+                <div *ngIf="g.np!=0">
+                    {{g.np }}
+                    </div>
+                    </td>
+                <td>
+                <input class="form-control" type="number" placeholder="qte" [(ngModel)]="g.qte">
+                    
+                </td>
+                
+<td>
+                    <div *ngIf="g.np==0">
+                {{(g.price * g.qte) }}
+                    </div>
+                    
+                    <div *ngIf="g.np!=0">
+                        {{(g.np * g.qte) }}
+                        </div>
+                </td>
+                <td>
+                    {{g.uid }}
+                </td>
+               
+                <td>
+
+                    <button
+                        class="btn btn-danger"
+                        (click)="delete(i)"
+                    >
+                        Delete
+                    </button>
+                    <button
+                        class="btn btn-danger"
+                        (click)="update(i)"
+                    >
+                        update
+                    </button>
+                </td>
+                
+            </tr>
+            
+            <tr>
+                <td colspan="3">montant Total</td>
+                <td>{{t}}</td>
+                <td >
+                    
+                   <button
+                        class="btn btn-success"
+                     (click)="tot()"   
+                    >
+                      totale
+                    </button>
+                    <button type="button" id="checkout-button"
+                    class="btn btn-info"
+                 (click)="confirm(t)" 
+                   
+                >
+        confirm
+                </button>
+
+              
+                <button    class="btn btn-success" (click)="delet()">del</button>
+                </td>
+                
+            </tr>
+        
+        </tbody>
+    
+    </table>
+    
+ 
+</div>
+

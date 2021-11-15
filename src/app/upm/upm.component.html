@@ -1,0 +1,9 @@
+
+    <form >
+        <input type="text" class="form-control" name="mark" [(ngModel)]="dataProduct.mark">
+        
+                    
+        <div class="alert alert-success" *ngIf="successUpdate">{{successUpdate}}</div>
+        <button class="btn btn-success" (click)="update()">Update now!</button>
+      </form>
+    

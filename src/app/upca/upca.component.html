@@ -1,0 +1,14 @@
+<div class="container">
+
+    <form >
+        <input type="text" class="form-control" name="categories" [(ngModel)]="dataProduct.categories">
+        
+                    
+        <div class="alert alert-success" *ngIf="successUpdate">{{successUpdate}}</div>
+        <button class="btn btn-success" (click)="update()">Update now!</button>
+      </form>
+      </div>
+      
+
+
+

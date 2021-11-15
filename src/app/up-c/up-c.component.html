@@ -1,0 +1,13 @@
+<div class="container">
+
+    <form>
+        <input type="text" class="form-control" name="flName" [(ngModel)]="datauser.flName">
+        <input type="text" class="form-control" name="email" [(ngModel)]="datauser.email">
+        <input type="text" class="form-control" name="password" [(ngModel)]="datauser.password">
+        <input type="text" class="form-control" name="role" [(ngModel)]="datauser.role">
+        <input type="text" class="form-control" name="adresse" [(ngModel)]="datauser.adress">
+        <div class="alert alert-success" *ngIf="successUpdate">{{successUpdate}}</div>
+        <button class="btn btn-success" (click)="update()">Update now!</button>
+      </form>
+      </div>
+      

@@ -1,0 +1,158 @@
+<button type="button" (click)="notify()">notify</button>
+<form #l="ngForm" (ngSubmit)="onChange(l)" >
+  <div class="uk-margin">
+          <div class="uk-inline">
+              <span class="uk-form-icon" uk-icon="icon: happy"></span>
+              <input class="uk-input" type="text" name="flName" #flName="ngModel" ngModel required>
+              <p class="alert alert-danger" *ngIf="flName.errors?.required && flName.touched">this input firstName and lastName are required</p>                
+          </div>
+  </div>    
+  
+  
+<input type="submit" class="btn btn-success" style="width: 20%;" value="register" [disabled]="l.invalid">
+</form>
+<button class="btn btn-primary" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">Add products</button>
+
+    <div class="body"  >
+
+    
+        <table id="table" class="table table-bordered">
+         <thead>
+    <tr>
+      <th scope="col">categories</th>
+      <th scope="col">title</th>
+      <th scope="col">description</th>
+      <th scope="col">price</th>
+      <th scope="col">qte</th>
+      <th scope="col">mark</th>
+      <th scope="col">image</th>
+      <th  scope="col">offer</th>
+    <th  scope="col">percent</th>
+    <th scope="col">offerv</th>
+    <th scope="col">nprice</th>
+    <th scope="col">offf</th>
+      <th scope="col" colspan="4" class="text-center">options</th>
+    </tr>
+  </thead>
+    <tbody  *ngFor="let item of dataArray,index as i"  >
+     
+                    <tr>
+                      <td> <p class="card-text">{{item.categories}}</p></td>
+                    
+                      <td><p class="card-text">{{item.title}}</p></td>  
+                      <td><p class="card-text">{{item.description}}</p></td>
+                      <td><p class="card-text">{{item.price}}</p></td>
+                      <td><p class="card-text">{{item.qte}}</p></td>
+                      <td><p class="card-text">{{item.mark}}</p></td>
+
+
+                      <td><img  [src]="item.image" width="30px" height="30px"></td>
+                      <td><p class="card-text">{{item.offer}}</p></td>
+                      <td><p class="card-text">{{item.percent}}</p></td>
+                      <td><p class="card-text">{{item.offerv}}</p></td>
+                      <td><p class="card-text">{{item.np}}</p></td>
+                      <td><p class="card-text">{{item.offf}}</p></td>
+                            <td><a class="btn btn-primary" (click)="updatep(item.id)">update</a>
+                     </td>
+                      <td>
+                      <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal2">Update im</button>
+                    </td>
+                    <td>
+                      <button class="btn btn-danger" (click)="delete(item.id)">delete</button>
+                    </td>
+                    <td>
+                      <button class="btn btn-primary" (click)="updateq(item.id,qte.value)">quantity</button><br>
+                      <input type="text" class="form-control"  #qte >
+                    </td>
+                    </tr>
+    </tbody>
+   
+
+                  </table> 
+    </div>
+    
+      <div   *ngFor="let item of dataArray">
+                  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <form>
+                           <input type="file" accept=".jpg,.zip"  (change)="uploadImage($event,item.id)">
+                          
+                           <div *ngIf="persentages | async as pct">
+                            <div *ngIf="pct == 100"  class="alert alert-success">Upload Successfully</div>
+                                      
+                            <progress
+                              id="js-progressbar"
+                              class="uk-progress"
+                              [value]="pct"
+                              max="100"
+                            ></progress>
+                          </div>
+                           
+               
+                
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                
+                        </div>
+                      </div>
+                    </div>          
+          </div>
+          </div>
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form #f="ngForm" (ngSubmit)="addNewGood(f)" width="70px" height="60px">
+                    <input class="uk-input" type="text" name="title"   placeholder="title"   #title="ngModel" ngModel required>
+                    <p class="alert alert-danger" *ngIf="title.errors?.required && title.touched">this input title is required</p>                
+                
+                    <input class="uk-input" type="text" name="price"    placeholder="price" #price="ngModel" ngModel  required>
+                    <p class="alert alert-danger" *ngIf="price.errors?.required && price.touched">this input price is required</p>
+                    <select name="cat" ngModel class="form-control">
+                      <option value="">--Please choose an option--</option>
+                      <option *ngFor="let cat of kj " [value]="cat.id">{{cat.categories}}</option>
+                    </select>
+                    <select name="mark" ngModel class="form-control">
+                      <option value="">--Please choose an option--</option>
+                      <option *ngFor="let mark of kl " [value]="mark.id">{{mark.mark}}</option>
+                    </select>
+                    <input class="uk-input" type="text" name="description" placeholder="description" #description="ngModel" ngModel  required>
+                    <p class="alert alert-danger" *ngIf="description.errors?.required && description.touched">this input email is required</p>
+                    
+                    <input class="uk-input" type="text" name="qte"   placeholder="qte" #qte="ngModel" ngModel  required>
+                    <p class="alert alert-danger" *ngIf="qte.errors?.required && qte.touched">this input email is required</p>
+                    
+                    <input type="file"  ngModel name="image" required #image width="300px" height="450px"> <br><br>
+                    <select name="offer" ngModel> 
+                      <option value="null">null</option>
+                      <option value="discount">discount</option>
+                      <option value="offer"> offer</option>
+                    </select>
+                    <input type="text" ngModel name="percent" #percent="ngModel" placeholder="percent" >
+                    <input type="text" ngModel name="offerv" #offerv="ngModel" placeholder="offerv" >
+                    <input type="text" ngModel name="offf" #offf="ngModel" placeholder="offf" >
+                    
+                    <input type="submit" value="Add" class="btn btn-primary" [disabled]="f.invalid">
+                  
+
+                  </form>
+                 
+                </div>
+                   
+    </div>
+  </div>
+             
+    </div>
+    
+   

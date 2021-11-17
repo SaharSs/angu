@@ -2,6 +2,10 @@
 import { Component, OnInit, ElementRef ,ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
+import firebase from 'firebase/app';
+import { stringify } from 'querystring';
+
+import { Button } from 'selenium-webdriver';
 import { AuthService } from '../services/auth.service';
 import { ShService } from '../services/sh.service'
 
@@ -114,13 +118,16 @@ m:any;
       this.cart = cart.map((shopping) => {
           this.fs.doc(`users/${this.as.use}/cart/${shopping.payload.doc.id}`).delete()
       })
-      this.t=0;  
+      this.t=0;
+      
+    
+  
       });
-      window.location.reload();
         
     
 
 }
+bv:any
 update(i:any){
   if(this.fm[i].qte<=JSON.parse(localStorage.getItem('md'))){
   this.cs.updatee(this.fm[i].id,this.fm[i].qte)
@@ -131,34 +138,42 @@ update(i:any){
   }
 }  
 
+
 tot(){
   let le=this.fm.filter(y=>y);
-  let f=0
-while(f<=this.size-1){
+
+for( let f=0;f<=this.size-1;f++){
   if(le[f].np==0){
+   
     this.t+=(le[f].qte*le[f].price);
+  
   }else{
 this.t+=(le[f].qte*le[f].np)
-}
-f++  
 
 }
+ 
+}
+
 
 return this.t;
-  
-    
-    
-  }
-  
-    confirm(total:number) {
+ 
+}
+isV: boolean = true;
+    confirm() {
+
        let data = {
         name: localStorage.getItem('ls'),
         total: this.tot(),
         uid: localStorage.getItem('sl'),
         adress:localStorage.getItem('gt'),
+        date : firebase.firestore.FieldValue.serverTimestamp(),
+        
         };
-       
+      
+    console.log(data.date)
+    
         this.cs.orders(data).then(()=>console.log("yes"));
+        localStorage.setItem('sf',JSON.stringify(data.date))
         let r=0;
         let re=this.fm.filter(y=>y);
        
@@ -187,7 +202,7 @@ return this.t;
   }
   })
    
-
+ 
       const paymentHandler = (<any>window).StripeCheckout.configure({
         key: 'pk_test_51JducsAi0N2fpujzKyiS120MyqAYnpWCa468Heo0m9xiKgOZoQ7yf6DChrrYrWhXDIzN12oGNRdou6IlUn3iqjI1008yLUBSu4',
         locale: 'auto',
@@ -205,13 +220,13 @@ return this.t;
       
       paymentHandler.open({
         name: 'e commerce',
-        description: '3 widgets',
-        amount: total 
+        description: 'computer',
+        amount:data.total
       });
      
      
    
-        
+      this.isV = false;  
        
         
            }

@@ -19,6 +19,7 @@ export class PayComponent implements OnInit {
     })
    }
 l:any
+n:Date
 title = 'html-to-pdf-angular-application';
 public convetToPDF()
 {
@@ -37,22 +38,24 @@ pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
 pdf.save('new-file.pdf'); // Generated PDF
 });
 }
+
   ngOnInit(): void {
     console.log(this.keyParams)
-    
+ 
       this.fs.collection('orders').snapshotChanges().subscribe((data)=>{
        console.log(data)
-      
-        this.l=data.map(ele=>{
-        
-           return{
+      console.log(JSON.parse(localStorage.getItem('sf')))
+       this.n=JSON.parse(localStorage.getItem('sf'))
+      this.l=data.map(ele=>{
+       return{
             id:ele.payload.doc.id,
             name:ele.payload.doc.data()['name'],
             adress:ele.payload.doc.data()['adress'],
             total:ele.payload.doc.data()['total'],
             uid:ele.payload.doc.data()['uid'],
+            date:ele.payload.doc.data()['date']
            }
-       
+        
         })
         
       });

@@ -1,1 +1,66 @@
-<p>ad-orders works!</p>
+<span class="text-primary" style="cursor: pointer;"> <i class="fas fa-plus-circle"  data-bs-toggle="modal" data-bs-target="#exampleModal"></i> 
+</span>  
+<div class="body"  >
+
+
+    <table class="table" >
+     <thead class="table-dark">
+<tr class="text-center">
+  <th scope="col">uid</th>
+  <th scope="col">name</th>
+  <th scope="col">total</th>
+  <th scope="col">adress</th>
+  <th scope="col">date</th>
+  
+  <th scope="col" colspan="3">options</th>
+</tr>
+</thead>
+<tbody  *ngFor="let item of dataArray" >
+        
+                <tr>
+                  <td><h5 class="card-title">{{item.uid}}</h5></td>
+                
+                  <td><p class="card-text">{{item.name}}</p></td>  
+                  <td><p class="card-text">{{item.total}}</p></td>
+                  <td><p class="card-text">{{item.adress}}</p></td>
+                  <td><p class="card-text">{{item.date.toDate()}}</p></td>
+                  
+                        <td><span class="text-save" style="cursor: pointer;"><i class="fas fa-pen-square"(click)="updateo(item.id)"></i></span>
+                 </td>
+<td>
+<span class="text-danger" style="cursor: pointer;"><i class="fa fa-trash" (click)="delete(item.id)"></i></span>
+                </td>
+                </tr>
+</tbody>
+              </table> 
+</div>
+  
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #f="ngForm" (ngSubmit)="addNewo(f)" width="70px" height="60px">
+          <input class="uk-input" type="text" name="name"   placeholder="name"   #name="ngModel" ngModel required>
+          <p class="alert alert-danger" *ngIf="name.errors?.required && name.touched">this input title is required</p>                
+      
+          <input class="uk-input" type="text" name="total"    placeholder="total" #total="ngModel" ngModel  required>
+          <p class="alert alert-danger" *ngIf="total.errors?.required && total.touched">this input price is required</p>
+          
+          <input type="text" ngModel name="adress" #adress="ngModel" placeholder="adress" >
+          <input type="text" ngModel name="uid" #uid="ngModel" placeholder="uid" >
+          
+          <input type="submit" value="Add" class="btn btn-primary" [disabled]="f.invalid">
+        
+
+        </form>
+       
+      </div>
+         
+</div>
+</div>
+   
+</div>

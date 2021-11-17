@@ -1,24 +1,10 @@
-<button type="button" (click)="notify()">notify</button>
-<form #l="ngForm" (ngSubmit)="onChange(l)" >
-  <div class="uk-margin">
-          <div class="uk-inline">
-              <span class="uk-form-icon" uk-icon="icon: happy"></span>
-              <input class="uk-input" type="text" name="flName" #flName="ngModel" ngModel required>
-              <p class="alert alert-danger" *ngIf="flName.errors?.required && flName.touched">this input firstName and lastName are required</p>                
-          </div>
-  </div>    
-  
-  
-<input type="submit" class="btn btn-success" style="width: 20%;" value="register" [disabled]="l.invalid">
-</form>
-<button class="btn btn-primary" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">Add products</button>
 
-    <div class="body"  >
-
-    
-        <table id="table" class="table table-bordered">
-         <thead>
-    <tr>
+<button type="button" style="float: right;" (click)="notify()">notify</button>
+ <span class="text-primary" style="cursor: pointer;"> <i class="fas fa-plus-circle"  data-bs-toggle="modal" data-bs-target="#exampleModal"></i> 
+      </span>    
+        <table id="table" class="table">
+         <thead class="table-dark">
+    <tr class="text-center">
       <th scope="col">categories</th>
       <th scope="col">title</th>
       <th scope="col">description</th>
@@ -52,13 +38,13 @@
                       <td><p class="card-text">{{item.offerv}}</p></td>
                       <td><p class="card-text">{{item.np}}</p></td>
                       <td><p class="card-text">{{item.offf}}</p></td>
-                            <td><a class="btn btn-primary" (click)="updatep(item.id)">update</a>
+                            <td>   <span class="text-success" style="cursor: pointer;"><i class="fas fa-pen-square" (click)="updatep(item.id)"></i></span>
                      </td>
                       <td>
-                      <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal2">Update im</button>
+                        <span class="text-save" style="cursor: pointer;"><i class="fas fa-pen-square"  data-bs-toggle="modal" data-bs-target="#exampleModal2"></i></span>
                     </td>
                     <td>
-                      <button class="btn btn-danger" (click)="delete(item.id)">delete</button>
+                      <span class="text-danger" style="cursor: pointer;"><i class="fa fa-trash" (click)="delete(item.id)"></i></span>
                     </td>
                     <td>
                       <button class="btn btn-primary" (click)="updateq(item.id,qte.value)">quantity</button><br>
@@ -68,8 +54,21 @@
     </tbody>
    
 
-                  </table> 
-    </div>
+                  </table>
+                 
+  
+    <form #l="ngForm" (ngSubmit)="onChange(l)" >
+      <div class="uk-margin">
+              <div class="uk-inline">
+                  <span class="uk-form-icon" uk-icon="icon: happy"></span>
+                  <input class="uk-input" type="text" name="flName" #flName="ngModel" ngModel required>
+                  <p class="alert alert-danger" *ngIf="flName.errors?.required && flName.touched">empty</p>                
+              </div>
+      </div>    
+      
+      
+    <input type="submit" class="btn btn-success" style="width: 5%;" value="per" [disabled]="l.invalid">
+    </form>
     
       <div   *ngFor="let item of dataArray">
                   <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

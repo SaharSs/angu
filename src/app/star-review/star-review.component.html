@@ -1,6 +1,6 @@
 
 <fieldset class="rating">
-    <ng-container *ngFor="let num of [4,3,2,1]">
+    <ng-container *ngFor="let num of [4,3,2,1]">        
         <input (click)="starhandler(num)"
         [id]="'star'+num"
         [value]="num"

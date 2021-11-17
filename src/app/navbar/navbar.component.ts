@@ -53,8 +53,11 @@ userData:any
     this.fs.signOut().then(()=>{
       
       localStorage.removeItem('user');
+      
       localStorage.removeItem('sl')
-   
+      localStorage.removeItem('vs');
+      localStorage.removeItem('gt');
+      localStorage.removeItem('ls');
       this.route.navigate(['/login']);
       window.location.reload();
     

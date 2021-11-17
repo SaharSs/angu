@@ -29,6 +29,7 @@ import { UpcaComponent } from './upca/upca.component';
 import { UpmComponent } from './upm/upm.component';
 import { AboutComponent } from './about/about.component';
 import { DetailComponent } from './detail/detail.component';
+import { UpoComponent } from './upo/upo.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
@@ -36,13 +37,15 @@ const routes: Routes = [
   {path:'register',component:RegisterComponent},
   {path:'shopping',component:ShoppingComponent},
   {path:'products',component:ProductsComponent},
-  {path:'about',component:AboutComponent,canActivate:[AdminAuthService]},
+  {path:'about',component:AboutComponent},
   {path:'home/:key',component:ShoppingComponent},
   {path:'ad-product',component:AdProductComponent,canActivate:[ AdminAuthService]} ,
   {path:'ad-product/:key',component:UpdatepComponent,canActivate:[AdminAuthService]},
   {path:'ad-client',component:AdClientComponent,canActivate:[AdminAuthService]},
   {path:'ad-client/:key',component:UpCComponent,canActivate:[AdminAuthService]},
   {path:'ad-orders',component:AdOrdersComponent,canActivate:[AdminAuthService]},
+  {path:'ad-orders/:key',component:UpoComponent,canActivate:[AdminAuthService]},
+ 
   {path:'loginad',component:LoginadComponent},
   {path:'registerad',component:RegisteradComponent},
   {path:'shopping/:key',component:PayComponent},

@@ -12,7 +12,8 @@ export class DetailComponent implements OnInit {
   dataProduct={
     title:'',
     image:'',
-    description:''
+    description:'',
+    price:''
   }
 constructor(private parms:ActivatedRoute,private fs:AngularFirestore) { 
     this.parms.params.subscribe(query=>{
@@ -24,6 +25,7 @@ constructor(private parms:ActivatedRoute,private fs:AngularFirestore) {
       console.log(data.data())
       this.dataProduct.title=data.data()['title']
       this.dataProduct.image=data.data()['image']
+      this.dataProduct.price=data.data()['price']
       this.dataProduct.description=data.data()['description']
     })
 

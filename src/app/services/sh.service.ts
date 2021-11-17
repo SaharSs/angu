@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
 import { AuthService } from './auth.service';
-
+import firebase from 'firebase/app';
 @Injectable({
   providedIn: 'root'
 })
@@ -72,6 +72,17 @@ cart: any
                       })});
                     })
             }
+            addNewo(name:string,total:number,adress:string,uid:string) {
+             
+              this.fs.collection('orders').doc().set({
+                                name:name,
+                                total:total,
+                                adress:adress,
+                                date : firebase.firestore.FieldValue.serverTimestamp(),
+                                uid:uid                              
+                              });
+                            
+                    }
  /*addNewuser(flName:string,email:string,role:string,adress:string,password:string) {
             this.fs.collection('users').doc().set({
                               flName:flName,

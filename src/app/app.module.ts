@@ -39,6 +39,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SectionComponent } from './section/section.component';
 import { AboutComponent } from './about/about.component';
 import { DetailComponent } from './detail/detail.component';
+import { UpoComponent } from './upo/upo.component';
 
 
 
@@ -71,6 +72,7 @@ FooterComponent,
 SectionComponent,
 AboutComponent,
 DetailComponent,
+UpoComponent,
 
 
 

@@ -1,0 +1,12 @@
+<div class="container">
+      <form>
+        <input type="text" class="form-control" name="name" [(ngModel)]="datao.name">
+        <input type="text" class="form-control" name="total" [(ngModel)]="datao.total">
+        <input type="text" class="form-control" name="adress" [(ngModel)]="datao.adress">
+        <input type="text" class="form-control" name="date" [(ngModel)]="datao.date">
+   
+        <div class="alert alert-success" *ngIf="successUpdate">{{successUpdate}}</div>
+        <button class="btn btn-success" (click)="updat()">Update now!</button>
+      </form>
+      </div>
+      

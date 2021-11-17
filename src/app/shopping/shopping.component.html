@@ -7,7 +7,8 @@
         class="table"
         style="text-align:center"
     >
-        <thead>
+        <thead class="table-dark">
+            <tr class="text-center">
             <th>Name</th>
             <th>Price</th>
             
@@ -16,6 +17,7 @@
             <th>Total</th>
             <th>uid</th>
             <th>Options</th>
+            </tr>
         </thead>
         
         <tbody   *ngIf="m==lp">
@@ -51,18 +53,16 @@
                
                 <td>
 
-                    <button
-                        class="btn btn-danger"
+                    <span class="text-danger" style="cursor: pointer;"><i class="fa fa-trash"
+                    
                         (click)="delete(i)"
                     >
-                        Delete
-                    </button>
-                    <button
-                        class="btn btn-danger"
+                    </i></span>&nbsp;
+                    <span class="text-save" style="cursor: pointer;"><i class="fas fa-pen-square"
+                        
                         (click)="update(i)"
                     >
-                        update
-                    </button>
+                        </i></span>
                 </td>
                 
             </tr>
@@ -71,26 +71,26 @@
                 <td colspan="3">montant Total</td>
                 <td>{{t}}</td>
                 <td >
-                    
-                   <button
-                        class="btn btn-success"
-                     (click)="tot()"   
-                    >
-                      totale
-                    </button>
+                  
+
+                   <div *ngIf="isV;">
                     <button type="button" id="checkout-button"
                     class="btn btn-info"
-                 (click)="confirm(t)" 
-                   
+                 (click)="confirm()" 
+                
                 >
         confirm
-                </button>
+                </button></div>
 
               
-                <button    class="btn btn-success" (click)="delet()">del</button>
+               
+                </td>
+                <td>
+                    <button    class="btn btn-danger btn pull-right" (click)="delet()">delete</button>
                 </td>
                 
             </tr>
+            
         
         </tbody>
     

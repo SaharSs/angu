@@ -45,7 +45,8 @@ m:any;
  size:any
  fm:any
  l:any
-
+ siz:any
+ts:any
   
 
   ngOnInit(): void {
@@ -67,6 +68,7 @@ m:any;
 		})
    
     this.fs.collection('products').snapshotChanges().subscribe((data)=>{
+      this.siz=data.length
       this.dtz=data.map(ele=>{
          return{
           id:ele.payload.doc.id,
@@ -134,7 +136,8 @@ update(i:any){
   console.log("gooddddddd")
   }
   else{
-    console.log('leeeeesss')
+
+ window.alert(this.fm[i].title+'there is not this qantity')
   }
 }  
 
@@ -143,6 +146,7 @@ tot(){
   let le=this.fm.filter(y=>y);
 
 for( let f=0;f<=this.size-1;f++){
+ 
   if(le[f].np==0){
    
     this.t+=(le[f].qte*le[f].price);
@@ -151,8 +155,9 @@ for( let f=0;f<=this.size-1;f++){
 this.t+=(le[f].qte*le[f].np)
 
 }
- 
+   
 }
+
 
 
 return this.t;
@@ -187,13 +192,19 @@ isV: boolean = true;
         let o=0
        if(re[r].uid==shopping.payload.doc.id){
          console.log(re[r].uid)
-          
+          if(re[r].qte<shopping.payload.doc.data()['qte']){
          o=shopping.payload.doc.data()['qte']-re[r].qte
         this.fs.doc(`products/${shopping.payload.doc.id}`).update({
         
          qte:o
        })
-       
+     
+      }else{
+     
+        this.ts=re[r].title+'no qantity';
+        
+      }
+     
          
           
          }
@@ -227,7 +238,7 @@ isV: boolean = true;
      
    
       this.isV = false;  
-       
+     
         
            }
            invokeStripe() {

@@ -1,18 +1,20 @@
 
 <div>
-    <input type="button" value="Convert" (click)="convetToPDF()"/>
+ 
     </div>
 
 <table
 class="table"
-style="text-align:center"  id="contentToConvert"
+style="text-align:center"
+  id="contentToConvert"
 >
-<thead>
+<thead class="table-dark" >
+    <tr class="text-center">
     <th>Name</th>
-    <th>adress</th>
-    <th>total</th>
+    
     <th>date</th>
-   
+    <th>option</th>
+   </tr>
  
 </thead>
 <tbody *ngFor="let h of l">
@@ -20,11 +22,11 @@ style="text-align:center"  id="contentToConvert"
    <tr *ngIf="keyParams==h.uid">
     
     <td >{{h.name}}</td>
-    <td >{{h.adress}}</td>
-    <td >{{h.total}}</td>
-    <td>{{h.date.toDate() | date: 'dd/MM HH:mm'}}</td>
     
-   </tr>
-  
+    <td>{{h.date.toDate() | date: 'dd/MM HH:mm'}}</td>
+   <td> <button  type="button" class="btn btn-primary"  (click)="activate(h.id)">invoice</button> 
+   </td></tr>
+   
+      
 </tbody>
 </table>  

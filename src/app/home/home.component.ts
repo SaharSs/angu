@@ -64,9 +64,8 @@ po:any[]=[]
       this.route.queryParamMap.subscribe(params=>{
         this.categories=params.get('categories');
         this.mark=params.get('mark')
-     
-        console.log(this.categories)
-      this.dtz=data.map(ele=>{
+         console.log(this.categories)
+         this.dtz=data.map(ele=>{
         return{
           id:ele.payload.doc.id,
           title:ele.payload.doc.data()['title'],

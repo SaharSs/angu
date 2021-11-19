@@ -54,7 +54,7 @@ export class LoginadComponent implements OnInit {
           
         }else{
           
-          this.route.navigate[('/')]
+          this.route.navigateByUrl("/")
           
          
         

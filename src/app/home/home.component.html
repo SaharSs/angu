@@ -20,12 +20,12 @@
   <ul  *ngFor="let cat of categoryList" class="list-unstyled templatemo-accordion">
     
         <li class="pb-3">
-   <a routerLink="/" [queryParams]="{categories:cat.id}"  class="collapsed d-flex justify-content-between h3 text-decoration-none" >
-         {{ cat.categories}}
-         <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
-    </a>
+            <a routerLink="/" [queryParams]="{categories:cat.id}"  class="collapsed d-flex justify-content-between h3 text-decoration-none" >
+             {{ cat.categories}}
+             <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
+        </a>
     
-   <ul class="collapse show list-unstyled pl-3" *ngFor="let mr of markk">
+      <ul class="collapse show list-unstyled pl-3" *ngFor="let mr of markk">
     
    <li><a routerLink="/" [queryParams]="{categories:cat.id,mark:mr.id}"  class="text-decoration-none" >
    {{mr.mark}}
@@ -133,39 +133,45 @@
         <div class="col" *ngIf="categories && ! mark ">
 
           <div *ngIf="p.categories==categories ">
-           <div class="card mb-4 product-wap rounded-0">
-    <div class="card rounded-0">
-            <img [src]="p.Image" class="card-img rounded-0 img-fluid" style="width: 11rem;height:7rem;"alt="..."    >
-            <div class="card-body">
-          
-                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                    <ul class="list-unstyled">
-            <h5 class="card-title">{{p.title}}</h5>
-         <p class="card-text">{{p.Description}}</p>
-        <div *ngIf="p.offer!='discount'">
-         <p class="card-text">{{p.price}}</p>
-         </div>
-         <div *ngIf="p.offer=='discount'">
-           <div *ngIf="p.percent!='0'">
-          <div class="alert alert-success" *ngIf="m">{{m}}</div>
-          <p class="card-text" ><s >{{p.price}}</s></p>
-          <p>{{p.np}}</p>
-       </div>
-       </div>
-    </ul>
-</div>
-</div>
-</div>
-
-          </div>
-          <div class="list-unstyled d-flex justify-content-center mb-1">
-            <a class="btn btn-success text-white mt-2" 
-         (click)="addto(i)"
-         *ngIf="add !== i"
-     >
-         Add to cart
-         <i class="fas fa-cart-plus"></i></a></div>
+           
+            <div class="card my-2">
     
+            <img [src]="p.Image"  class="card-img rounded-0 img-fluid" style="width: 11rem;height:7rem;"  alt="..."    >
+            <div class="card-header">
+                <div class="card-title">
+          
+               
+        <h5 >{{p.title | titlecase}}</h5>
+        </div>
+        </div>
+        <div class="card-body">
+            <div *ngIf="p.offer!='discount'">
+               <div *ngIf="p.percent=='0'">
+          <p  class="lead">{{p.price | currency:'USD'}}</p>
+            </div>
+            </div>
+            <div *ngIf="p.offer=='discount'">
+               <div *ngIf="p.percent!='0'">
+            
+           <p  class="lead"><s>{{p.price | currency:'USD'}}</s></p>
+             <p  class="lead">{{p.np | currency:'USD'}}</p>
+         </div>
+         </div>
+             </div>
+
+          
+             <div class="list-unstyled d-flex justify-content-center mb-1">
+                <button class="btn btn-outline-primary btn-sm btn-block"
+                [class.disabled]="p.qte < 1"
+                [class.btn-outline-danger]="p.qte < 1"
+                 [disabled]="p.qte < 1"
+           
+             (click)="addto(i)"
+             *ngIf="add !== i"
+         >
+         {{ p.qte < 1 ? "NO STOCK" : "Add To Cart"}}
+             <i class="fas fa-cart-plus"></i></button></div>
+        
      <div *ngIf="add === i">
          <input
              type="number"
@@ -184,46 +190,53 @@
        </div>
   </div>
 </div>
-
+</div>
     
 
      <div  *ngIf=" mark && categories">
         <div *ngIf="p.mark==mark && p.categories==categories">
       
             <div *ngIf="p.categories==categories ">
-                <div class="card mb-4 product-wap rounded-0">
-         <div class="card rounded-0">
+              
+        <div class="card my-2">
         <img [src]="p.Image" class="card-img rounded-0 img-fluid" style="width: 11rem;height:7rem;" alt="...">
-        <div class="card-body">
-          
-            <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                <ul class="list-unstyled">
-        <h5 class="card-title">{{p.title}}</h5>
+        <div class="card-header">
+            <div class="card-title">
+      
+           
+    <h5 >{{p.title | titlecase}}</h5>
+    </div>
+    </div>
      <p class="card-text">{{p.Description}}</p>
-    <div *ngIf="p.offer!='discount'">
-     <p class="card-text">{{p.price}}</p>
+     <div class="card-body">
+        <div *ngIf="p.offer!='discount'">
+           <div *ngIf="p.percent=='0'">
+      <p  class="lead">{{p.price | currency:'USD'}}</p>
+        </div>
+        </div>
+        <div *ngIf="p.offer=='discount'">
+           <div *ngIf="p.percent!='0'">
+        
+       <p  class="lead"><s>{{p.price | currency:'USD'}}</s></p>
+         <p  class="lead">{{p.np | currency:'USD'}}</p>
      </div>
-     <div *ngIf="p.offer=='discount'">
-         <div *ngIf="p.percent!='0'">
-      <div class="alert alert-success" *ngIf="m">{{m}}</div>
-      <p class="card-text" ><s >{{p.price}}</s></p>
-      <p>{{p.np}}</p>
-  
-</div>
-</div>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="list-unstyled d-flex justify-content-center mb-1">
-    <a class="btn btn-success text-white mt-2" 
- (click)="addto(i)"
- *ngIf="add !== i"
->
- Add to cart
- <i class="fas fa-cart-plus"></i></a></div>
+     </div>
+         </div>
 
+
+
+         <div class="list-unstyled d-flex justify-content-center mb-1">
+            <button class="btn btn-outline-primary btn-sm btn-block"
+            [class.disabled]="p.qte < 1"
+            [class.btn-outline-danger]="p.qte < 1"
+             [disabled]="p.qte < 1"
+       
+         (click)="addto(i)"
+         *ngIf="add !== i"
+     >
+     {{ p.qte < 1 ? "NO STOCK" : "Add To Cart"}}
+         <i class="fas fa-cart-plus"></i></button></div>
+    
 
  <div *ngIf="add === i">
      <input
@@ -244,7 +257,7 @@
    </div>
    </div>
    </div>
-   
+   </div>
 
 
 </div>

@@ -30,15 +30,16 @@ import { UpmComponent } from './upm/upm.component';
 import { AboutComponent } from './about/about.component';
 import { DetailComponent } from './detail/detail.component';
 import { UpoComponent } from './upo/upo.component';
+import { AuthService } from './services/auth.service';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
   {path:'login',component:LoginComponent},
   {path:'register',component:RegisterComponent},
-  {path:'shopping',component:ShoppingComponent},
+  {path:'shopping',component:ShoppingComponent,canActivate:[AuthgardService]},
   {path:'products',component:ProductsComponent},
   {path:'about',component:AboutComponent},
-  {path:'home/:key',component:ShoppingComponent},
+  {path:'home/:key',component:ShoppingComponent,canActivate:[AuthgardService]},
   {path:'ad-product',component:AdProductComponent,canActivate:[ AdminAuthService]} ,
   {path:'ad-product/:key',component:UpdatepComponent,canActivate:[AdminAuthService]},
   {path:'ad-client',component:AdClientComponent,canActivate:[AdminAuthService]},
@@ -48,12 +49,13 @@ const routes: Routes = [
  
   {path:'loginad',component:LoginadComponent},
   {path:'registerad',component:RegisteradComponent},
-  {path:'shopping/:key',component:PayComponent},
+  {path:'shopping/:key',component:PayComponent,canActivate:[AuthgardService]},
   {path:'categories',component:CategoriesComponent},
   {path:'mark',component:MarkComponent},
   { path: 'products/:key', component:DetailComponent},
   {path:'categories/:key',component:UpcaComponent,canActivate:[AdminAuthService]},
   {path:'mark/:key',component:UpmComponent,canActivate:[AdminAuthService]},
+  {path:'shopping/:key/:id',component:KhComponent},
 
 ];
 

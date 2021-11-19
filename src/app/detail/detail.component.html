@@ -4,7 +4,7 @@
 <div class="section">
 <div class="container">
   <div class="row d-flex">
-    <div class="col-4 col-md-pull-5 ">
+    <div class="col-4 col-md-pull-5 p-5 mt-4 ">
       <div class="product-preview">
           <img [src]="dataProduct.image" style="width: 100%; height: 60%;" alt="" srcset="">
           </div>  
@@ -20,8 +20,11 @@
           <p class="card-text">{{dataProduct.description}}</p>
       
         </div>
+        <button (click)="addToCart()" *ngIf="dataProduct.qte>='1'" class="add-to-cart-btn"><i
+          class="fa fa-shopping-cart"></i>Add To Cart
+        </button>
         </div>
-        
+      
         
       
       </div>

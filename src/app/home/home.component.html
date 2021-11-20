@@ -20,12 +20,12 @@
   <ul  *ngFor="let cat of categoryList" class="list-unstyled templatemo-accordion">
     
         <li class="pb-3">
-            <a routerLink="/" [queryParams]="{categories:cat.id}"  class="collapsed d-flex justify-content-between h3 text-decoration-none" >
+            <a  [queryParams]="{categories:cat.id}"   data-bs-toggle="collapse" href="#collapseExample"  aria-expanded="false" aria-controls="collapseExample">
              {{ cat.categories}}
-             <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
+            
         </a>
     
-      <ul class="collapse show list-unstyled pl-3" *ngFor="let mr of markk">
+      <ul  class="collapse" id="collapseExample" *ngFor="let mr of markk">
     
    <li><a routerLink="/" [queryParams]="{categories:cat.id,mark:mr.id}"  class="text-decoration-none" >
    {{mr.mark}}
@@ -60,8 +60,8 @@
            
       
 
-    <div   class="col-md-4 col-sm-6"style="width:auto" *ngFor="let p of dtz| filter:term;index as i ">
-  
+    <div   class="col-md-4 col-sm-6"style="width:auto" *ngFor="let p of dtz|paginate: { itemsPerPage: 2, currentPage: page,totalItems:totallength}|filter:term;index as i">
+  {{totallength}}
            
           
         <div class="col" *ngIf="!categories && !mark ||!categories && !mark ">
@@ -259,9 +259,12 @@
    </div>
    </div>
 
+   
+</div>
+</div>
+<pagination-controls  class="text-center"(pageChange)="page = $event"></pagination-controls>
 
 </div>
-</div>
-</div>
+
 </div>
 

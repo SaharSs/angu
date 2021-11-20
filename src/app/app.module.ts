@@ -40,6 +40,8 @@ import { SectionComponent } from './section/section.component';
 import { AboutComponent } from './about/about.component';
 import { DetailComponent } from './detail/detail.component';
 import { UpoComponent } from './upo/upo.component';
+import {NgxPaginationModule} from 'ngx-pagination'; 
+
 
 
 
@@ -87,7 +89,8 @@ UpoComponent,
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    NgxPaginationModule
     
   ],
   providers: [AuthService],

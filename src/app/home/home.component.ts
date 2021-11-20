@@ -39,6 +39,9 @@ categories:string='';
 categoryList:any;
 ProdData: any[] = [];
 po:any[]=[]
+totallength:any;
+page:number=1;
+show:any=[]
   ngOnInit(): void {
     this.sh.getCategories().subscribe(data => {
       this.categoryList = data.map((shopping) => {
@@ -65,6 +68,8 @@ po:any[]=[]
         this.categories=params.get('categories');
         this.mark=params.get('mark')
          console.log(this.categories)
+        
+         this.totallength=data.length;
          this.dtz=data.map(ele=>{
         return{
           id:ele.payload.doc.id,

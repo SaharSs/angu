@@ -47,7 +47,7 @@ m:any;
  l:any
  siz:any
 ts:any
-  
+  u:any
 
   ngOnInit(): void {
  
@@ -80,8 +80,9 @@ ts:any
       })
     });
     
-    this.invokeStripe();
     
+        
+    this.invokeStripe()
    // this.loadStripe();
  
 }
@@ -165,16 +166,28 @@ return this.t;
 }
 isV: boolean = true;
     confirm() {
-
-       let data = {
-        name: localStorage.getItem('ls'),
-        total: this.tot(),
-        uid: localStorage.getItem('sl'),
-        adress:localStorage.getItem('gt'),
-        date : firebase.firestore.FieldValue.serverTimestamp(),
-        
-        };
+      let le=this.fm.filter(y=>y);
+       let rf=this.dtz.filter(t=>t)
+    for( let f=0;f<=this.size-1;f++){
+      for(let h=0;h<=this.siz-1;h++){
+          if(le[f].uid==rf[h].id){
+      if( le[f].qte>rf[h].qte){
+    
+     window.alert(le[f].title +'not exist')
+       window.location.reload();
+       }  
+              
+  }
+}}
+    let data = {
+      name: localStorage.getItem('ls'),
+      total: this.tot(),
+      uid: localStorage.getItem('sl'),
+      adress:localStorage.getItem('gt'),
+      date : firebase.firestore.FieldValue.serverTimestamp(),
       
+      };
+     
     console.log(data.date)
     
         this.cs.orders(data).then(()=>console.log("yes"));
@@ -212,8 +225,8 @@ isV: boolean = true;
    r++ ;
   }
   })
-   
- 
+
+
       const paymentHandler = (<any>window).StripeCheckout.configure({
         key: 'pk_test_51JducsAi0N2fpujzKyiS120MyqAYnpWCa468Heo0m9xiKgOZoQ7yf6DChrrYrWhXDIzN12oGNRdou6IlUn3iqjI1008yLUBSu4',
         locale: 'auto',
@@ -235,34 +248,33 @@ isV: boolean = true;
         amount:data.total
       });
      
-     
+              this.isV = false;  
+ 
    
-      this.isV = false;  
-     
-        
-           }
-           invokeStripe() {
-            if(!window.document.getElementById('stripe-script')) {
-              const script = window.document.createElement("script");
-              script.id = "stripe-script";
-              script.type = "text/javascript";
-              script.src = "https://checkout.stripe.com/checkout.js";
-              script.onload = () => {
-                this.paymentHandler = (<any>window).StripeCheckout.configure({
-                  key: 'pk_test_51JducsAi0N2fpujzKyiS120MyqAYnpWCa468Heo0m9xiKgOZoQ7yf6DChrrYrWhXDIzN12oGNRdou6IlUn3iqjI1008yLUBSu4',
-                  locale: 'auto',
-                  token: function (stripeToken: any) {
-                    console.log(stripeToken)
-                    alert('Payment has been successfull!');
-                  }
-                });
-              }
-                
-              window.document.body.appendChild(script);
+         }
+        invokeStripe() {
+          if(!window.document.getElementById('stripe-script')) {
+            const script = window.document.createElement("script");
+            script.id = "stripe-script";
+            script.type = "text/javascript";
+            script.src = "https://checkout.stripe.com/checkout.js";
+            script.onload = () => {
+              this.paymentHandler = (<any>window).StripeCheckout.configure({
+                key: 'pk_test_51JducsAi0N2fpujzKyiS120MyqAYnpWCa468Heo0m9xiKgOZoQ7yf6DChrrYrWhXDIzN12oGNRdou6IlUn3iqjI1008yLUBSu4',
+                locale: 'auto',
+                token: function (stripeToken: any) {
+                  console.log(stripeToken)
+                  alert('Payment has been successfull!');
+                }
+              });
             }
-            
-        
-          }       /* var handler = (<any>window).StripeCheckout.configure({
+              
+            window.document.body.appendChild(script);
+          }
+          
+      
+        }   
+               /* var handler = (<any>window).StripeCheckout.configure({
           key: 'pk_test_aeUUjYYcx4XNfKVW60pmHTtI',
           locale: 'auto',
           token: function (token: any) {
